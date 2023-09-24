@@ -8,14 +8,14 @@ async function postTickets(ticket: CreateTicket) {
 }
 
 async function checkEnrollment(userId: number) {
-  return await prisma.enrollment.findFirst({
+  return await prisma.enrollment.findUnique({
     where: { userId },
   });
 }
 
-async function findTicketByEnrollment(enrollmentId: number) {
+async function getTicketById(id: number) {
   return prisma.ticket.findUnique({
-    where: { enrollmentId },
+    where: { id },
     include: {
       TicketType: true,
     },
@@ -25,7 +25,7 @@ async function findTicketByEnrollment(enrollmentId: number) {
 const ticketsRepository = {
   checkEnrollment,
   postTickets,
-  findTicketByEnrollment,
+  getTicketById,
 };
 
 export default ticketsRepository;

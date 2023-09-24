@@ -9,15 +9,17 @@ async function postTickets(userId: number, ticketTypeId: number): Promise<Ticket
 
   if (!checkEnrollment) throw notFoundError();
 
-  const ticket: CreateTicket = {
+  const ticketInfo: CreateTicket = {
     ticketTypeId,
     enrollmentId: checkEnrollment.id,
     status: 'RESERVED',
   };
 
-  await ticketsRepository.postTickets(ticket);
+  const ticket = await ticketsRepository.postTickets(ticketInfo);
 
-  return await ticketsRepository.findTicketByEnrollment(checkEnrollment.id);
+  const result = await ticketsRepository.getTicketById(ticket.id);
+
+  return result;
 }
 
 const ticketsService = {
