@@ -16,3 +16,14 @@ export async function postTickets(req: AuthenticatedRequest, res: Response) {
     return res.sendStatus(httpStatus.NOT_FOUND);
   }
 }
+
+export async function getTickets(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+
+  try {
+    const ticket = await ticketsService.getTickets(userId);
+    return res.status(httpStatus.OK).send(ticket);
+  } catch (error) {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+}

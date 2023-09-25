@@ -22,6 +22,19 @@ async function postTickets(userId: number, ticketTypeId: number): Promise<Ticket
   return result;
 }
 
+async function getTickets(userId: number) {
+  const checkEnrollment = await ticketsRepository.checkEnrollment(userId);
+
+  if (!checkEnrollment) throw notFoundError();
+
+  const ticket = await ticketsRepository.getTickets(checkEnrollment.id);
+
+  if (!ticket) throw notFoundError();
+
+  return ticket;
+}
+
 export const ticketsService = {
   postTickets,
+  getTickets,
 };
