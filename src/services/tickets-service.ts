@@ -1,6 +1,6 @@
 import { Ticket } from '@prisma/client';
 import { notFoundError } from '@/errors';
-import ticketsRepository from '@/repositories/tickets-repository';
+import { ticketsRepository } from '@/repositories';
 
 export type CreateTicket = Omit<Ticket, 'id' | 'createdAt' | 'updatedAt'>;
 
@@ -22,8 +22,6 @@ async function postTickets(userId: number, ticketTypeId: number): Promise<Ticket
   return result;
 }
 
-const ticketsService = {
+export const ticketsService = {
   postTickets,
 };
-
-export default ticketsService;

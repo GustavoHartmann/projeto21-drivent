@@ -1,5 +1,5 @@
 import { prisma } from '@/config';
-import { CreateTicket } from '@/services/tickets-service';
+import { CreateTicket } from '@/services';
 
 async function postTickets(ticket: CreateTicket) {
   return prisma.ticket.create({
@@ -22,10 +22,8 @@ async function getTicketById(id: number) {
   });
 }
 
-const ticketsRepository = {
+export const ticketsRepository = {
   checkEnrollment,
   postTickets,
   getTicketById,
 };
-
-export default ticketsRepository;
