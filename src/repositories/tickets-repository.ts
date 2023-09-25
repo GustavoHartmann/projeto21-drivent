@@ -31,9 +31,14 @@ async function getTickets(enrollmentId: number) {
   });
 }
 
+async function getTicketsTypes() {
+  return await prisma.ticketType.findMany();
+}
+
 export const ticketsRepository = {
   checkEnrollment,
   postTickets,
   getTicketById,
   getTickets,
+  getTicketsTypes,
 };
