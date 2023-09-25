@@ -4,7 +4,7 @@ import { AuthenticatedRequest } from '@/middlewares';
 import { ticketsService } from '@/services';
 
 export async function postTickets(req: AuthenticatedRequest, res: Response) {
-  const ticketTypeId = req.body as number;
+  const ticketTypeId = req.body.ticketTypeId as number;
   const { userId } = req;
 
   if (!ticketTypeId) return res.sendStatus(httpStatus.BAD_REQUEST);
