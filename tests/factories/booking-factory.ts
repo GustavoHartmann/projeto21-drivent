@@ -47,7 +47,7 @@ export function createEnrollmentScenario() {
 }
 
 export function createTicketScenario(
-  mockedEnroolmentId: number,
+  mockedEnrollmentId: number,
   isRemote?: boolean,
   includesHotel?: boolean,
   ticketStatus?: string,
@@ -60,7 +60,7 @@ export function createTicketScenario(
   } = {
     id: genericId,
     ticketTypeId: genericId,
-    enrollmentId: mockedEnroolmentId,
+    enrollmentId: mockedEnrollmentId,
     status: ticketStatus === 'RESERVED' ? TicketStatus.RESERVED : TicketStatus.PAID,
     createdAt: genericPastDate,
     updatedAt: genericPastDate,
@@ -97,17 +97,42 @@ export function createRoomScenario(capacity?: number) {
   return mockedRoom;
 }
 
-export function createBookingScenario(mockedEnroolmentId: number, mockedRoomId: number) {
+export function createBookingScenario(mockedEnrollmentId: number, mockedRoomId: number) {
   const genericId = faker.datatype.number();
   const genericPastDate = faker.date.past();
 
   const mockedBooking: Booking = {
     id: genericId,
-    userId: mockedEnroolmentId,
+    userId: mockedEnrollmentId,
     roomId: mockedRoomId,
     createdAt: genericPastDate,
     updatedAt: genericPastDate,
   };
 
   return mockedBooking;
+}
+
+export function createBookingWithRoomScenario() {
+  const genericId = faker.datatype.number();
+  const genericPastDate = faker.date.past();
+
+  const mockedBookingWithRoom: Booking & {
+    Room: Room;
+  } = {
+    id: genericId,
+    userId: genericId,
+    roomId: genericId,
+    createdAt: genericPastDate,
+    updatedAt: genericPastDate,
+    Room: {
+      id: genericId,
+      name: faker.address.buildingNumber(),
+      capacity: 3,
+      hotelId: genericId,
+      createdAt: genericPastDate,
+      updatedAt: genericPastDate,
+    },
+  };
+
+  return mockedBookingWithRoom;
 }
