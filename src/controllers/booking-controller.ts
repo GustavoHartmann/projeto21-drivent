@@ -11,3 +11,10 @@ export async function createBooking(req: AuthenticatedRequest, res: Response) {
   const booking = await bookingService.createBooking(userId, roomId);
   return res.status(httpStatus.OK).send(booking);
 }
+
+export async function getBooking(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+
+  const booking = await bookingService.getBooking(userId);
+  return res.status(httpStatus.OK).send(booking);
+}

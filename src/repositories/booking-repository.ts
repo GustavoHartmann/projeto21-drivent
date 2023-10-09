@@ -20,7 +20,19 @@ async function checkRoomAvailability(roomId: number) {
   });
 }
 
+async function getBooking(userId: number) {
+  return await prisma.booking.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      Room: true,
+    },
+  });
+}
+
 export const bookingRepository = {
   createBooking,
   checkRoomAvailability,
+  getBooking,
 };
