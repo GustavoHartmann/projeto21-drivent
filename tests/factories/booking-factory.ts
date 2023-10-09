@@ -15,7 +15,7 @@ export function createEnrollmentScenario() {
   const genericId = faker.datatype.number();
   const genericPastDate = faker.date.past();
 
-  const mockedEnroolment: Enrollment & {
+  const mockedEnrollment: Enrollment & {
     Address: Address[];
   } = {
     id: genericId,
@@ -43,7 +43,7 @@ export function createEnrollmentScenario() {
     ],
   };
 
-  return mockedEnroolment;
+  return mockedEnrollment;
 }
 
 export function createTicketScenario(
